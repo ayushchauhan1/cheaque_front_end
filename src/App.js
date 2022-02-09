@@ -7,6 +7,7 @@ import {
 import "./App.css";
 import Left from "./components/left/left";
 import Navbar from "./components/navbar/navbar";
+import Transactions from "./components/transactions/transactions";
 import Users from "./components/users/users";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
     <div className="app">
       <Left />
       <Navbar />
-      <Users />
+      {/* <Users /> */}
+      <Transactions />
     </div>
   );
 }
