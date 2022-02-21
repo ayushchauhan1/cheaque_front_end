@@ -7,6 +7,7 @@ import Users from "./components/users/users";
 import Active from "./components/active_cheaques/active_cheaques";
 import Addmoney from "./components/addmoney/addmoney";
 import User_active from "./components/user_active_cheaques/user_active_cheaques";
+import User_transactions from "./components/user_transactions/transactions";
 function App() {
   return (
     <div className="app">
@@ -49,7 +50,7 @@ function App() {
           />
           <Route
             exact={true}
-            path="/transactions"
+            path="/user_transactions"
             render={() => (
               <>
                 <Left />
@@ -58,7 +59,17 @@ function App() {
               </>
             )}
           />
+          <Route
+            exact={true}
+            path="/transactions"
+            render={() => (
+              <>
+                <Left />
 
+                <User_transactions />
+              </>
+            )}
+          />
           <Route
             exact={true}
             path="/apk"

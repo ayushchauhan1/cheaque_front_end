@@ -53,16 +53,20 @@ export class users extends Component {
               </td>
               <td>
                 <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Open
-                  </button>
+                  <Link to="/user_active">
+                    <button type="button" class="btn btn-light">
+                      Open
+                    </button>
+                  </Link>
                 </div>
               </td>
               <td>
                 <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Open
-                  </button>
+                  <Link to="/user_transactions">
+                    <button type="button" class="btn btn-light">
+                      Open
+                    </button>
+                  </Link>
                 </div>
               </td>
               <td>
