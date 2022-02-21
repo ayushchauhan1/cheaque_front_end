@@ -3,6 +3,14 @@
   width: 100vw;
   height: 100vh;
 }
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+  text-decoration: none !important;
+  cursor: pointer;
+}
 .left {
   position: absolute;
   width: 260px;

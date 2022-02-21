@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./users.css";
+import { Link } from "react-router-dom";
 export class users extends Component {
   render() {
     return (
@@ -66,9 +67,11 @@ export class users extends Component {
               </td>
               <td>
                 <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Add
-                  </button>
+                  <Link to="/addmoney">
+                    <button type="button" class="btn btn-light">
+                      Add
+                    </button>
+                  </Link>
                 </div>
               </td>
             </tr>
