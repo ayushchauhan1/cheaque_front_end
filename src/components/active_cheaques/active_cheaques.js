@@ -1,6 +1,21 @@
 import React, { Component } from "react";
 import "./active_cheaques.css";
+import axios from "axios";
 export class active_cheaques extends Component {
+  state = {
+    cheaques: [],
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () => {
+    axios.get(`http://localhost:5000/cheaque/activecheaques`).then((res) => {
+      console.log(res.data);
+      this.setState({ cheaques: res.data });
+    });
+  };
   render() {
     return (
       <div>
@@ -23,12 +38,14 @@ export class active_cheaques extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Ayush1</td>
-                <td>Dhwaj23</td>
-                <td>5000</td>
-              </tr>
+              {this.state.cheaques.map((cheaque, index) => (
+                <tr>
+                  <th scope="row">{index + 1}</th>
+                  <td>{cheaque.usernameSender}</td>
+                  <td>{cheaque.usernameReciever}</td>
+                  <td>{cheaque.amount}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

@@ -2,7 +2,22 @@ import React, { Component } from "react";
 import "./users.css";
 import jsPDF from "jspdf";
 import { Link } from "react-router-dom";
+import axios from "axios";
 export class users extends Component {
+  state = {
+    users: [],
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () => {
+    axios.get(`http://localhost:5000/login/users`).then((res) => {
+      console.log(res.data);
+      this.setState({ users: res.data });
+    });
+  };
   cheaquegen = () => {
     var doc = new jsPDF();
     doc.rect(5, 80, 200, 70);
@@ -53,51 +68,54 @@ export class users extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Ayush1</td>
-              <td>3456 785 2445</td>
-              <td>Ayush Chauhan</td>
-              <td>10,000</td>
-              <td>
-                <div className="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-light"
-                    onClick={this.cheaquegen}
-                  >
-                    Issue
-                  </button>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <Link to="/user_active">
-                    <button type="button" class="btn btn-light">
-                      Open
+            {this.state.users.map((user, index) => (
+              <tr>
+                <th scope="row">{index + 1}</th>
+                <td>{user.username}</td>
+                <td>{user.accountNumber}</td>
+                <td>{user.name}</td>
+                <td>{user.amount}</td>
+                <td>
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      onClick={this.cheaquegen}
+                    >
+                      Issue
                     </button>
-                  </Link>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <Link to="/user_transactions">
-                    <button type="button" class="btn btn-light">
-                      Open
-                    </button>
-                  </Link>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <Link to="/addmoney">
-                    <button type="button" class="btn btn-light">
-                      Add
-                    </button>
-                  </Link>
-                </div>
-              </td>
-            </tr>
+                  </div>
+                </td>
+                <td>
+                  <div className="text-center">
+                    <Link to="/user_active">
+                      <button type="button" class="btn btn-light">
+                        Open
+                      </button>
+                    </Link>
+                  </div>
+                </td>
+                <td>
+                  <div className="text-center">
+                    <Link to="/user_transactions">
+                      <button type="button" class="btn btn-light">
+                        Open
+                      </button>
+                    </Link>
+                  </div>
+                </td>
+                <td>
+                  <div className="text-center">
+                    <Link to="/addmoney">
+                      <button type="button" class="btn btn-light">
+                        Add
+                      </button>
+                    </Link>
+                  </div>
+                </td>
+              </tr>
+            ))}
+
             <tr>
               <th scope="row">2</th>
               <td>Ayush1</td>

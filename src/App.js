@@ -55,7 +55,7 @@ function App() {
               <>
                 <Left />
 
-                <Transactions />
+                <User_transactions />
               </>
             )}
           />
@@ -66,7 +66,7 @@ function App() {
               <>
                 <Left />
 
-                <User_transactions />
+                <Transactions />
               </>
             )}
           />
