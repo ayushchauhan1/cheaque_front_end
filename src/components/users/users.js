@@ -6,6 +6,7 @@ import axios from "axios";
 export class users extends Component {
   state = {
     users: [],
+    cheaques: [],
   };
 
   componentDidMount() {
@@ -18,19 +19,53 @@ export class users extends Component {
       this.setState({ users: res.data });
     });
   };
-  cheaquegen = () => {
-    var doc = new jsPDF();
-    doc.rect(5, 80, 200, 70);
-    doc.text("PAY", 10, 100);
-    doc.line(25, 100, 120, 100);
-    doc.text("RUPEES", 10, 120);
-    doc.line(37, 120, 120, 120);
-    doc.rect(122, 110, 30, 10);
-    doc.rect(160, 85, 35, 35);
-    doc.text("SCAN CODE", 161, 130);
-    doc.text("BY AYUSH CHAUHAN", 50, 140);
+  cheaquegen = (user) => {
+    const username = {
+      username: user,
+      number: 10,
+    };
+    axios
+      .post("http://localhost:5000/cheaque/generation", username)
+      .then((res) => {
+        // console.log(res.data);
+      });
 
-    window.open(doc.output("bloburl"));
+    axios
+      .get(`http://localhost:5000/cheaque/generation/send/${user}`)
+      .then((res) => {
+        // console.log(res.data[0]);
+        // this.setState({ cheaques: res.data });
+        var doc = new jsPDF();
+        doc.rect(5, 80, 200, 70);
+        doc.text("PAY", 10, 100);
+        doc.line(25, 100, 120, 100);
+        doc.text("RUPEES", 10, 120);
+        doc.line(37, 120, 120, 120);
+        doc.rect(122, 110, 30, 10);
+
+        doc.addImage(res.data[0].qrc, 160, 85, 35, 35);
+        doc.rect(160, 85, 35, 35);
+        doc.text("SCAN CODE", 161, 130);
+        doc.text(`BY ${user}`, 50, 140);
+
+        for (let i = 1; i < 10; i++) {
+          doc.addPage("a4");
+
+          doc.rect(5, 80, 200, 70);
+          doc.text("PAY", 10, 100);
+          doc.line(25, 100, 120, 100);
+          doc.text("RUPEES", 10, 120);
+          doc.line(37, 120, 120, 120);
+          doc.rect(122, 110, 30, 10);
+          doc.addImage(res.data[i].qrc, 160, 85, 35, 35);
+          doc.rect(160, 85, 35, 35);
+          doc.text("SCAN CODE", 161, 130);
+
+          doc.text(`BY ${user}`, 50, 140);
+        }
+        window.open(doc.output("bloburl"));
+      });
+    // console.log(cheaques);
   };
   render() {
     return (
@@ -80,7 +115,9 @@ export class users extends Component {
                     <button
                       type="button"
                       class="btn btn-light"
-                      onClick={this.cheaquegen}
+                      onClick={() => {
+                        this.cheaquegen(user.username);
+                      }}
                     >
                       Issue
                     </button>
