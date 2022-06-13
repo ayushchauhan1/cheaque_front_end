@@ -125,7 +125,7 @@ export class users extends Component {
                 </td>
                 <td>
                   <div className="text-center">
-                    <Link to="/user_active">
+                    <Link to={`/activecheaques/${user.username}`}>
                       <button type="button" class="btn btn-light">
                         Open
                       </button>
@@ -134,7 +134,7 @@ export class users extends Component {
                 </td>
                 <td>
                   <div className="text-center">
-                    <Link to="/user_transactions">
+                    <Link to={`/transcations/${user.username}`}>
                       <button type="button" class="btn btn-light">
                         Open
                       </button>
@@ -152,77 +152,6 @@ export class users extends Component {
                 </td>
               </tr>
             ))}
-
-            <tr>
-              <th scope="row">2</th>
-              <td>Ayush1</td>
-              <td>3456 785 2445</td>
-              <td>Ayush Chauhan</td>
-              <td>10,000</td>
-              <td>
-                <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Issue
-                  </button>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Open
-                  </button>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Open
-                  </button>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Add
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Ayush1</td>
-              <td>3456 785 2445</td>
-              <td>Ayush Chauhan</td>
-              <td>10,000</td>
-              <td>
-                <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Issue
-                  </button>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Open
-                  </button>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Open
-                  </button>
-                </div>
-              </td>
-              <td>
-                <div className="text-center">
-                  <button type="button" class="btn btn-light">
-                    Add
-                  </button>
-                </div>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>

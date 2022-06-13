@@ -1,6 +1,24 @@
 import React, { Component } from "react";
 import "./user_transaction.css";
-export class user_transactions extends Component {
+import axios from "axios";
+export class transactions extends Component {
+  state = {
+    cheaques: [],
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () => {
+    console.log(window.location.pathname);
+    axios
+      .get(`http://localhost:5000/cheaque/${window.location.pathname}`)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ cheaques: res.data });
+      });
+  };
   render() {
     return (
       <div>
@@ -23,12 +41,14 @@ export class user_transactions extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Ayush1</td>
-                <td>Dhwaj23</td>
-                <td>500</td>
-              </tr>
+              {this.state.cheaques.map((cheaque, index) => (
+                <tr>
+                  <th scope="row">{index + 1}</th>
+                  <td>{cheaque.usernameSender}</td>
+                  <td>{cheaque.usernameReciever}</td>
+                  <td>{cheaque.amount}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -37,4 +57,4 @@ export class user_transactions extends Component {
   }
 }
 
-export default user_transactions;
+export default transactions;

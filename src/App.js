@@ -39,18 +39,17 @@ function App() {
           />
           <Route
             exact={true}
-            path="/user_active"
+            path="/activecheaques/:id"
             render={() => (
               <>
                 <Left />
-
                 <User_active />
               </>
             )}
           />
           <Route
             exact={true}
-            path="/user_transactions"
+            path="/transcations/:id"
             render={() => (
               <>
                 <Left />
